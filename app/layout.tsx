@@ -46,6 +46,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="4d7520f2-9ac1-48da-b754-c62eb0b4381c"
+        />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} bg-[#08090d] font-sans text-[#f4f5f7] antialiased`}>
         <CheckoutShell>{children}</CheckoutShell>
         <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="afterInteractive" />
