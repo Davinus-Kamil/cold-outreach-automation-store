@@ -2,7 +2,6 @@
 
 import { useCheckout } from "@/components/purchase/CheckoutProvider";
 import { PRODUCT } from "@/lib/product";
-import { trackUmamiEvent } from "@/lib/umami";
 
 type BuyButtonProps = {
   className?: string;
@@ -19,10 +18,9 @@ export function BuyButton({ className = primaryClass, children, location }: BuyB
   return (
     <button
       type="button"
-      onClick={() => {
-        trackUmamiEvent("buy_clicked", location ? { location } : undefined);
-        openCheckout();
-      }}
+      data-umami-event="buy_clicked"
+      {...(location ? { "data-umami-event-location": location } : {})}
+      onClick={openCheckout}
       className={className}
     >
       {children ?? `Get the Complete Package — ${PRODUCT.priceDisplay}`}

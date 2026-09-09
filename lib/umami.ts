@@ -1,5 +1,8 @@
 type UmamiTracker = {
-  track: (eventName: string, eventData?: Record<string, string | number | boolean>) => void;
+  track: (
+    eventName: string,
+    eventData?: Record<string, string | number | boolean>,
+  ) => void | Promise<void>;
 };
 
 declare global {
@@ -16,9 +19,16 @@ export function trackUmamiEvent(
     return;
   }
 
+  const tracker = window.umami;
+  if (!tracker?.track) {
+    console.log(`[Umami] ${eventName} skipped — window.umami.track is not available`, eventData ?? {});
+    return;
+  }
+
   try {
-    window.umami?.track(eventName, eventData);
-  } catch {
-    // Analytics must never interrupt checkout or browsing.
+    console.log(`[Umami] ${eventName}`, eventData ?? {});
+    void tracker.track(eventName, eventData);
+  } catch (error) {
+    console.log(`[Umami] ${eventName} failed`, error);
   }
 }
