@@ -39,7 +39,7 @@ export function PricingCard() {
               </div>
               <p className="mt-3 text-sm text-[#c4cdff]">Save {PRODUCT.savingsDisplay} on the reference price.</p>
               <div className="mt-8">
-                <BuyButton>Get Instant Access — {PRODUCT.priceDisplay}</BuyButton>
+                <BuyButton location="pricing">Get Instant Access — {PRODUCT.priceDisplay}</BuyButton>
               </div>
               <ImportReassurance />
               <p className="mt-4 text-sm text-[var(--muted)]">
@@ -82,7 +82,7 @@ export function FinalCTA() {
         outreach mechanics — your lead quality, offer and messaging still determine whether prospects reply.
       </p>
       <div className="mt-8">
-        <BuyButton>Automate My Outreach — {PRODUCT.priceDisplay}</BuyButton>
+        <BuyButton location="final_cta">Automate My Outreach — {PRODUCT.priceDisplay}</BuyButton>
       </div>
       <div className="mx-auto mt-4 flex max-w-lg justify-center">
         <ImportReassurance className="text-center" />

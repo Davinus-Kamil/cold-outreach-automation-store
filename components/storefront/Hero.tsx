@@ -59,7 +59,7 @@ export function Hero() {
             </div>
           </div>
           <div className="mt-5 flex flex-col gap-3 sm:mt-8 sm:flex-row lg:col-start-1">
-            <BuyButton />
+            <BuyButton location="hero" />
             <a
               href="#included"
               className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/12 px-5 py-3 text-sm font-medium text-white hover:border-white/30"

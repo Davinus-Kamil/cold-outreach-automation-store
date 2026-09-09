@@ -31,7 +31,10 @@ export function Header() {
           <Link href="/login" className="hover:text-white">
             My purchase
           </Link>
-          <BuyButton className="inline-flex min-h-11 items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-zinc-950 hover:bg-zinc-200">
+          <BuyButton
+            location="header"
+            className="inline-flex min-h-11 items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-zinc-950 hover:bg-zinc-200"
+          >
             Get the package — {PRODUCT.priceDisplay}
           </BuyButton>
         </nav>
@@ -65,7 +68,7 @@ export function Header() {
             >
               My purchase
             </Link>
-            <BuyButton />
+            <BuyButton location="header_mobile" />
           </div>
         </div>
       ) : null}

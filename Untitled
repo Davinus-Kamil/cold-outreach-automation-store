@@ -1,0 +1,89 @@
+We have already successfully installed Umami Analytics globally on this website, and page views are being recorded.
+
+Now I want to track the complete sales funnel so I can understand how visitors behave and where they drop off.
+
+IMPORTANT:
+Do not change the website design, UI, copy, Razorpay payment logic, backend verification, download system, or any existing functionality. Only add analytics event tracking to the appropriate existing actions.
+
+Use the existing Umami installation.
+
+I want to be able to measure:
+
+1. WEBSITE VISITS
+Umami already tracks page views automatically.
+Do not add duplicate page-view tracking.
+
+2. CTA CLICKS
+Track when a visitor clicks any genuine purchase/buy CTA on the website.
+
+Event name:
+buy_clicked
+
+If there are multiple purchase CTAs on different sections of the page, include useful event properties where possible, for example:
+location: hero
+location: pricing
+location: final_cta
+
+Do not track unrelated buttons as buy_clicked.
+
+3. CHECKOUT STARTED
+Track when the Razorpay checkout is actually opened successfully, not merely when someone clicks the initial CTA.
+
+Event name:
+checkout_started
+
+This should allow us to distinguish:
+Clicked Buy → Checkout actually opened.
+
+4. PURCHASE SUCCESS
+Track a purchase only AFTER the application's existing server-side Razorpay payment verification has successfully completed.
+
+Event name:
+purchase_success
+
+Do NOT fire purchase_success simply because the frontend Razorpay callback ran.
+Do NOT weaken, bypass, replace, or modify the existing server-side payment verification.
+
+Where safely available, attach non-sensitive properties such as:
+product: cold_outreach_automation
+amount: 1999
+currency: INR
+
+Do NOT send the customer's name, email, payment ID, phone number, Razorpay signature, secrets, or other personal/sensitive information to Umami.
+
+5. SUCCESS PAGE
+Ensure the existing purchase success page continues to be tracked normally by Umami page-view tracking.
+
+6. ERROR / ABANDONMENT
+Do not invent an "abandoned checkout" event because there may not be a reliable event for this.
+We should be able to infer funnel drop-off by comparing:
+Visitors
+→ buy_clicked
+→ checkout_started
+→ purchase_success
+
+7. PRESERVE EVERYTHING
+Do not alter:
+- Razorpay configuration
+- payment amounts
+- server-side verification
+- environment variables
+- download authorization
+- Supabase/database logic
+- page design
+- CTA behavior
+- routing
+- existing Umami script
+
+Only add the minimum analytics code necessary.
+
+8. CODE QUALITY
+Use Umami's supported event tracking method compatible with the existing installation.
+Avoid duplicate events from double handlers or component re-renders.
+Make sure a single normal user action does not accidentally generate multiple copies of the same event.
+
+After implementation:
+1. Tell me exactly which files you changed.
+2. Explain where each event fires.
+3. Confirm that payment verification/security logic was not modified.
+4. Tell me how I can manually test each event before deploying.

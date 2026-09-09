@@ -7,6 +7,7 @@ import { useCheckout } from "@/components/purchase/CheckoutProvider";
 import { parseCustomer, type CustomerDetails } from "@/lib/customer";
 import { PRODUCT } from "@/lib/product";
 import { storePurchaseResult } from "@/lib/purchase-result";
+import { trackUmamiEvent } from "@/lib/umami";
 import type { RazorpayCheckoutResponse } from "@/types/razorpay-checkout";
 
 const fieldClass =
@@ -180,6 +181,11 @@ export function CheckoutModal() {
         handler: (response) => {
           void verifyPayment(response, details)
             .then((result) => {
+              trackUmamiEvent("purchase_success", {
+                product: "cold_outreach_automation",
+                amount: PRODUCT.priceInr,
+                currency: PRODUCT.currency,
+              });
               storePurchaseResult({
                 email: details.email,
                 downloadUrl: result.downloadUrl,
@@ -215,6 +221,11 @@ export function CheckoutModal() {
       });
 
       checkout.open();
+      trackUmamiEvent("checkout_started", {
+        product: "cold_outreach_automation",
+        amount: PRODUCT.priceInr,
+        currency: PRODUCT.currency,
+      });
     } catch {
       processingRef.current = false;
       setPaymentError("Payment could not be verified. Please try again.");
